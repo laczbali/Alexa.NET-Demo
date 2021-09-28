@@ -29,9 +29,16 @@ namespace AlexaDemo.Controllers
 
 			switch(intentRequest.Intent.Name)
 			{
+
+				// ----------------
+				// HelloWorld
+				// ----------------
 				case "Hello":
 					return MakeSkillResponse("IT'S ALIVE!");
 
+				// ----------------
+				// Slot demo
+				// ----------------
 				case "OptionIntent":
 					try
 					{
@@ -50,7 +57,6 @@ namespace AlexaDemo.Controllers
 						}
 
 						
-
 						return MakeSkillResponse($"You have selected {slotValuesCombined}");
 					}
 					catch(Exception)
@@ -58,6 +64,9 @@ namespace AlexaDemo.Controllers
 						return MakeSkillResponse("I was unable to process your option intent");
 					}
 
+				// ----------------
+				// Unhandled intent demo
+				// ----------------
 				default:
 					return MakeSkillResponse($"I don't know the intent called {intentRequest.Intent.Name}. Sorry.");
 			}
