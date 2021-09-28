@@ -32,6 +32,32 @@ namespace AlexaDemo.Controllers
 				case "Hello":
 					return MakeSkillResponse("IT'S ALIVE!");
 
+				case "OptionIntent":
+					try
+					{
+						string slotValuesCombined;
+						var slotValue = intentRequest.Intent.Slots["option"].SlotValue;
+
+						if(slotValue.Value != null)
+						{
+							slotValuesCombined = slotValue.Value;
+						}
+						else
+						{
+							var values = slotValue.Values;
+							var valueStrings = values.ToList().Select(sv => sv.Value).ToList();
+							slotValuesCombined = string.Join(",", valueStrings);
+						}
+
+						
+
+						return MakeSkillResponse($"You have selected {slotValuesCombined}");
+					}
+					catch(Exception)
+					{
+						return MakeSkillResponse("I was unable to process your option intent");
+					}
+
 				default:
 					return MakeSkillResponse($"I don't know the intent called {intentRequest.Intent.Name}. Sorry.");
 			}
